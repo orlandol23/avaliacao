@@ -16,8 +16,11 @@ public class TurmaEntity {
     @Column(name = "ID_TURMA")
     private Long idTurma;
 
+    @Column(name = "DS_NOME")
+    private String nomeModulo;
+
     @ManyToOne
-    @JoinColumn(name = "ID_CURSO")
+    @JoinColumn(name = "ID_INSTRUTOR")
     private CursoEntity curso;
 
     @Column(name = "DT_INICIO")

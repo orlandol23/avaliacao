@@ -11,6 +11,7 @@ import com.rd.treinamentodev.AvaliacaoSpringBoot.model.entity.TurmaEntity;
 import com.rd.treinamentodev.AvaliacaoSpringBoot.repository.CursoRepository;
 import com.rd.treinamentodev.AvaliacaoSpringBoot.repository.TurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -28,10 +29,24 @@ public class TurmaService {
 
     SimpleDateFormat SDF = new SimpleDateFormat("dd/MM/yyyy");
 
+
+
     public List<TurmaDTO> listar(){
         List<TurmaEntity> listEntity = turmaRepository.findAll();
         List<TurmaDTO> listDTO = new ArrayList<>();
+        for (TurmaEntity entity: listEntity) {
+            TurmaDTO turmaDTO = new TurmaDTO();
+            turmaDTO.setCurso(CursoDTO.getcurso);
+            turmaDTO.setDtInicio(SDF.format(entity.getDtInicio()));
+            turmaDTO.setDtFim(SDF.format(entity.getDtFinal()));
+            turmaDTO.setInstrutores(entity.getInstrutores());
+            turmaDTO.setAlunos(entity.getAlunos());
 
+            TurmaDTO dto = turmaRepository.parseDTO(entity);
+            listDTO.add(dto);
+
+
+        }
         //TODO implementar a conversão da lista de objetos de TurmaEntity para TurmaDTO e retornar a listDTO preenchida
 
 
